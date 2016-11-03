@@ -26,7 +26,7 @@ def argument_parsing():
     parser.add_argument('--width', action='store', type=int, dest='width', help='width of new image')
     parser.add_argument('--scale', action='store', type=float, dest='scale', help='scale of image resizing')
     parser.add_argument('--height', action='store', type=int, dest='height', help='height of new image')
-    parser.add_argument('--output', action='store', type=str, dest='path_to_result', help='path to result image')
+    parser.add_argument('--output', action='store', type=str, dest='output', help='path to result image')
     return parser.parse_args()
 
 
@@ -61,7 +61,7 @@ def get_path_to_result(filepath, path_to_result):
         return path_to_result
     else:
         filepath_and_ext = path.splitext(filepath)
-        return '{}_{}x{}{}'.format(filepath_and_ext[0], new_size[0], new_size[1],
+        return '{}__{}x{}{}'.format(filepath_and_ext[0], new_size[0], new_size[1],
                                    filepath_and_ext[1])
 
 if __name__ == '__main__':
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     else:
             if not save_image_proportions:
                 print(u'Image proportions changed.')
-            path_to_result = get_path_to_result(path_to_original, args.path_to_result)
+            path_to_result = get_path_to_result(path_to_original, args.output)
             image.resize(new_size).save(path_to_result)
             print('Original image size: {}x{}'.format(image_size[0], image_size[1]))
             print('Saved new image with size:{}x{} at {}'.format(new_size[0], new_size[1], path_to_result))
